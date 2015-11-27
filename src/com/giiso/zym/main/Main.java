@@ -9,24 +9,29 @@ public class Main {
 		this.news = news;
 	}
 	
+	//Get the initial Value of the news
 	public double getInitValue(){
 		return Constants.w_1 * news.get_word_mark() + Constants.w_2 * news.getPos()
 				+ Constants.w_3 * news.getTypeMark() + Constants.w_4 * news.getTime() 
 				+ Constants.w_5 * news.getOri_rating();
 	}
 	
+	//Get the value of parameter a
 	public double getA(){
 		return news.getBro_rating()*news.getValidation();
 	}
 	
+	//Get the value of parameter b
 	public double getB(){
 		return news.getBro_rating()*news.getBro_rate();
 	}
 	
+	//Get the value of parameter c
 	public double getC(){
 		return news.getBro_rating()*0.5;
 	}
 	
+	//Get the value of parameter
 	public double getN(){
 		return news.getBro_rating()* this.getInitValue();
 	}

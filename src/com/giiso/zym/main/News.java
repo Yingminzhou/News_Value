@@ -2,6 +2,7 @@ package com.giiso.zym.main;
 
 public class News {
 	
+	//The key value to identify news 
 	private int news_id;
 	//The word count of the news
 	private int word_cnt;
