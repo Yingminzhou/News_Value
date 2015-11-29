@@ -1,53 +1,58 @@
 package com.giiso.zym.main;
 
 public class Main {
-
-	private News news;
-	
-	
-	public Main(News news){
-		this.news = news;
-	}
-	
-	//Get the initial Value of the news
-	public double getInitValue(){
-		return Constants.w_1 * news.get_word_mark() + Constants.w_2 * news.getPos()
-				+ Constants.w_3 * news.getTypeMark() + Constants.w_4 * news.getTime() 
-				+ Constants.w_5 * news.getOri_rating();
-	}
-	
-	//Get the value of parameter a
-	public double getA(){
-		return news.getBro_rating()*news.getValidation();
-	}
-	
-	//Get the value of parameter b
-	public double getB(){
-		return news.getBro_rating()*news.getBro_rate();
-	}
-	
-	//Get the value of parameter c
-	public double getC(){
-		return news.getBro_rating()*0.5;
-	}
-	
-	//Get the value of parameter
-	public double getN(){
-		return news.getBro_rating()* this.getInitValue();
-	}
 	
 	
 	
 	public static void main(String args[]){
-		News news = new News(1,460, true, "Comment", 2, 0.7, 0.5, 0.9, 1.2);
-		Main main = new Main(news);
-		System.out.println("a:"+main.getA());
-		System.out.println("b:"+main.getB());
-		System.out.println("c:"+main.getC());
-		System.out.println("v0:"+main.getInitValue());
-		System.out.println("n:"+main.getN());
+		News news = new News(1,460, true, "Comment", 2, 0.7, 0.5, 0.0, 0.0);
+		Model model = new Model(news);
 		
-		System.out.println("m:"+ 1.4109/Math.pow(0.7484,0.8));
-		
+		double t = 0.0;
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,0));
+		t = 2.0;
+		news.setValidation(0.6);
+		news.setBro_rate(0.6);
+		news.setBro_rating(0.9);
+		model.updateModel(news, t/4);
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,0.5));
+		t = 4.0;
+		news.setValidation(0.6);
+		news.setBro_rate(0.8);
+		news.setBro_rating(1.0);
+		model.updateModel(news, t/4);
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,0.5));
+		t = 6.0;
+		news.setValidation(0.8);
+		news.setBro_rate(0.8);
+		news.setBro_rating(1.2);
+		model.updateModel(news, t/4);
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,0.5));
+		t = 8.0;
+		news.setValidation(0.8);
+		news.setBro_rate(0.8);
+		news.setBro_rating(1.5);
+		model.updateModel(news, t/4);
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,0.5));
+		t = 10.0;
+		news.setValidation(0.8);
+		news.setBro_rate(0.0);
+		news.setBro_rating(0.0);
+		model.updateModel(news, t/4);
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,t/4));
+		t = 12.0;
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,t/4));
+		t = 14.0;
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,t/4));
+		t = 16.0;
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,t/4));
+		t = 18.0;
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,t/4));
+		t = 20.0;
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,t/4));
+		t = 22.0;
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,t/4));
+		t = 24.0;
+		System.out.println("t: "+ t + " Value:" + model.getCurValue(news,t/4));
 	}
 }
