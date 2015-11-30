@@ -9,12 +9,15 @@ public class Model {
 	private double m;
 	private double n;
 	private double tmpValue;
+	private boolean isFirstDec;
+	private double preT;
 	
 	public Model(News news){
 		this.initValue = Constants.w_1 * news.get_word_mark() + Constants.w_2 * news.getPos()
 				+ Constants.w_3 * news.getTypeMark() + Constants.w_4 * news.getTime() 
 				+ Constants.w_5 * news.getOri_rating();		
 		this.tmpValue = initValue;
+		this.isFirstDec = true;
 	}
 
 	private void updateIncModel(News news,double t){
@@ -36,18 +39,25 @@ public class Model {
 		if (news.getBro_rate()==0.0) {
 			return this.getDecVal(t);
 		}else{
-			return this.getIncVal(t);
+			System.out.println(t-this.preT);
+			return this.getIncVal(t-this.preT);
 		}
 	}
 	
 	public void updateModel(News news,double t){
 		if (news.getBro_rate()==0.0) {
-			updateDecModel(news, t);
+			if(this.isFirstDec){
+				updateDecModel(news, t);
+				this.isFirstDec = false;
+			}
 		}else{
 			updateIncModel(news, t);
 		}
 	}
 	
+	public void setPreT(double t){
+		this.preT = t;
+	}
 	
 	private double getIncVal(double t){
 		return -a*Math.pow(t, 3)+b*Math.pow(t, 2)+c*t+tmpValue;
